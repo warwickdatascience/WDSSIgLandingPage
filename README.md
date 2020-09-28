@@ -19,12 +19,12 @@ Run the python file IN ITS CURRENT DIRECTORY to update the posts and the html. T
 Ive tested deploying on Netlify, works fine, except the browser caches older versions sometimes so need to find a solution for that, i recommend using Netlify as react seems to not work using GitHub pages, or I just couldnt make it work
 ### 7. Dependencies
 ##### React Dependencies
-react-ga - `npm install react-ga --save`
-jquery - `npm install jquery --save`
-react-particles-js - `npm install react-particles-js`
+- react-ga - `npm install react-ga --save`
+- jquery - `npm install jquery --save`
+- react-particles-js - `npm install react-particles-js`
 ##### Python Dependencies
-requests - `pip install requests`
-BeautifulSoup - `pip install beautifulsoup4`
+- requests - `pip install requests`
+- BeautifulSoup4 - `pip install beautifulsoup4`
 
 ## Credits
 ##### Udemy Course
