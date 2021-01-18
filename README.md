@@ -14,7 +14,8 @@ Once you have a React app up and running by following the steps above, download 
 ### 4. Making Changes
 Running `npm start` again will get you the website.
 ### 5. Updating the posts and json file.
-Run the python file IN ITS CURRENT DIRECTORY to update the posts and the html. This is still a janky solution but it works for now.
+Run the python file IN ITS CURRENT DIRECTORY to update the posts and the html. This is still a janky solution but it works for now. The IG Api access tokens have expired due to non use. Use this <a href="https://developers.facebook.com/docs/instagram-basic-display-api/getting-started">guide</a> to create a facebook developer account and create your own tokens. Update the `access_token` variable in `public/LandingPage.py`
+  
 ### 6. Deploying
 Ive tested deploying on Netlify, works fine, except the browser caches older versions sometimes so need to find a solution for that, i recommend using Netlify as react seems to not work using GitHub pages, or I just couldnt make it work
 ### 7. Dependencies
