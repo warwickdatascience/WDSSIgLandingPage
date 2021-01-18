@@ -37,4 +37,3 @@ Ive tested deploying on Netlify, works fine, except the browser caches older ver
 <a href="https://www.udemy.com/projects-in-reactjs-the-complete-react-learning-course/learn/v4/overview">Projects in ReactJS: The Complete React Learning Course by Eduonix</a>
 
 ##### Stackoverflow
-(obviously, how else would I learn all this in such a short time) You get significantly better at googling down the line of programming lol.
