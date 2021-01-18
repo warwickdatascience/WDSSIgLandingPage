@@ -5,7 +5,7 @@ import re
 import os
 import shutil
 
-dir = './images/portfolio'
+dir = './public/images/portfolio'
 if os.path.exists(dir):
     shutil.rmtree(dir)
 os.makedirs(dir)
@@ -13,7 +13,7 @@ os.makedirs(dir)
 
 #  Gets posts from WDSS IG using the IG API, ive already generated a token.
 def getPosts():
-    access_token = "IGQVJWMmN5cnFILWV6dU1LNkZATQXBuN01rUEFiWTF1bWRmXzFoeDZAsTlJualRBci0wQ1RHZAmNZAVUJ1NWtQeVBPRlhCWW56ejMxOVdzQTd2ZATZA4MUJPRmFwd3JCVkNueWxDMHI3aHpDakdpY2p3YUtYZAQZDZD"
+    access_token = "IGQVJVZA2luTlY4Y2UtbnlzNUlGcFRTQUw2VGxNOG93TERkOXdDWmczVlpuVHpiU0dJZAWE2SF9kQkVGVm1MYjlUekJPZA2JscW81OUo5NkhNTW5ibTBHXzNiX29Ld0RPRUJBaEFRbkNOeldrUTEyQy1ISAZDZD"
     url = "https://graph.instagram.com/me/media?fields=id,media_url,caption,timestamp&access_token=" + access_token
     r = requests.get(url)
     data = r.json()
@@ -30,7 +30,7 @@ def writeImagesAndJSON(posts):
     for post in posts:
         jsonList.append(
             {"title": post[0], "category": ','.join(map(str, post[4])), "image": post[0] + ".png", "url": ""})
-        with open("./images/portfolio/m" + post[0] + ".png", "wb") as handle:
+        with open("./public/images/portfolio/m" + post[0] + ".png", "wb") as handle:
             response = requests.get(post[1], stream=True)
             for block in response.iter_content(1024):
                 if not block:
@@ -42,7 +42,7 @@ def writeImagesAndJSON(posts):
 
 
 def updateJSON(jsonList):
-    with open("./resumeData.json", "r+") as file:
+    with open("./public/resumeData.json", "r+") as file:
         data = json.load(file)
         data["portfolio"] = {"posts": jsonList}
         file.seek(0)
@@ -61,7 +61,7 @@ def updateOverlay(posts):
         linksToInject = """<div class="linkDivision"></div>""".join(links)
         overlay = overlay + overlayTemplate.replace("{MediaID}", "m"+post[0]).replace("{Caption}", post[2]).replace("{Date}", post[3]).replace("{Links}", linksToInject).replace("{CloseID}", "b"+post[0])
 
-    with open("index.html") as fp:
+    with open("public/index.html") as fp:
         soup = bs(fp, "html.parser")
     soup.find("div", attrs={"class": "overlay"}).replaceWith("""<div class="overlay">""" + overlay + """</div>""")
     html = soup.prettify().replace("&lt;", "<").replace("&gt;", ">")
@@ -69,7 +69,7 @@ def updateOverlay(posts):
 
 def updatePage(html):
     newHTML = bs(html, "html.parser").prettify()
-    with open("index.html", "w") as lp:
+    with open("public/index.html", "w") as lp:
         lp.write(newHTML)
 
 
@@ -82,8 +82,8 @@ js = writeImagesAndJSON(IGPosts)
 # Update JSON file
 updateJSON(js)
 
-# Update the overlay html
+# Update page
 newHtml = updateOverlay(IGPosts)
 
-# Update the HTML.
+# Update the HTML - for now this creates a new html file called LandingPage.html in the current folder.
 updatePage(newHtml)
