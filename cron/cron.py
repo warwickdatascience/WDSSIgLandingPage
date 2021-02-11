@@ -9,4 +9,4 @@ DATA_PATH = os.getenv("DATA_PATH")
 LOG_PATH = os.getenv("LOG_PATH")
 
 puller = InstagramPuller(INSTAGRAM_ACCESS_TOKEN, DATA_PATH, LOG_PATH)
-puller.pull()
+puller.set_data()
