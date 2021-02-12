@@ -1,7 +1,8 @@
-import requests # to GET from Instagram API
+import requests  # to GET from Instagram API
 import json     # to gather local data
 import re       # to extract links
 import logging  # to log information
+
 
 class InstagramPuller:
     def __init__(self, access_token, data_path, log_path):
@@ -13,11 +14,12 @@ class InstagramPuller:
         self.set_remote_data()
         self.set_local_data()
         self.set_new_data()
-       
+
     # add caption to the JSON data
     def add_caption(self, data):
         for x in data:
-            x.update(links=",".join(map(str, re.findall(r"(https?://[^\s]+)", x["caption"]))))
+            x.update(links=",".join(
+                map(str, re.findall(r"(https?://[^\s]+)", x["caption"]))))
         return data
 
     # collect data from remote
@@ -34,7 +36,8 @@ class InstagramPuller:
 
     # extract new data (requires remote and local set)
     def set_new_data(self):
-        self.new_data = [x for x in self.remote_data if x not in self.local_data]
+        self.new_data = [
+            x for x in self.remote_data if x not in self.local_data]
 
     # process any new images
     def process_images(self):
@@ -52,7 +55,7 @@ class InstagramPuller:
     def process_json(self):
         # prepend to the existing json data
         total_data = self.new_data + self.local_data
-            
+
         with open(f"{self.data_path}/post_data.json", "w") as write_file:
             json.dump(total_data, write_file)
 
