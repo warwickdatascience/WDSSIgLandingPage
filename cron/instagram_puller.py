@@ -53,11 +53,8 @@ class InstagramPuller:
 
     # process the JSON data
     def process_json(self):
-        # prepend to the existing json data
-        total_data = self.new_data + self.local_data
-
         with open(f"{self.data_path}/post_data.json", "w") as write_file:
-            json.dump(total_data, write_file)
+            json.dump(self.remote_data, write_file)
 
     # set the data that has been pulled
     def set_data(self):
