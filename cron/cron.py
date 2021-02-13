@@ -13,7 +13,8 @@ LOG_PATH = os.getenv("LOG_PATH")
 # the current path
 logger = logging.getLogger(__name__)
 
-f_format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+f_format = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 if os.path.isdir(LOG_PATH):
     f_handler = logging.FileHandler(f"{LOG_PATH}/instagram_puller.log")

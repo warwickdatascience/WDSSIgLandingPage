@@ -2,6 +2,7 @@ import requests  # to GET from Instagram API
 import json     # to gather local data
 import re       # to extract links
 
+
 class InstagramPuller:
     def __init__(self, access_token, data_path):
         self.access_token = access_token
@@ -27,7 +28,8 @@ class InstagramPuller:
             response_data = response.json()["data"]
             self.remote_data = self.add_caption(response_data)
         else:
-            raise Exception(f"When trying to access Instagram API, received response code {response.status_code}: {response.reason}")
+            raise Exception(
+                f"When trying to access Instagram API, received response code {response.status_code}: {response.reason}")
 
     # collect data from local storage
     def set_local_data(self):
