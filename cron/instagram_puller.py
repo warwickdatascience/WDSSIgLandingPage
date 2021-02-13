@@ -1,14 +1,11 @@
 import requests  # to GET from Instagram API
 import json     # to gather local data
 import re       # to extract links
-import logging  # to log information
-
 
 class InstagramPuller:
-    def __init__(self, access_token, data_path, log_path):
+    def __init__(self, access_token, data_path):
         self.access_token = access_token
         self.data_path = data_path
-        self.log_path = log_path
 
         # automatically cache the data
         self.set_remote_data()
@@ -26,8 +23,11 @@ class InstagramPuller:
     def set_remote_data(self):
         request_url = f"https://graph.instagram.com/me/media?fields=id,media_url,caption,timestamp&access_token={self.access_token}"
         response = requests.get(request_url)
-        response_data = response.json()["data"]
-        self.remote_data = self.add_caption(response_data)
+        if response.ok:
+            response_data = response.json()["data"]
+            self.remote_data = self.add_caption(response_data)
+        else:
+            raise Exception(f"When trying to access Instagram API, received response code {response.status_code}: {response.reason}")
 
     # collect data from local storage
     def set_local_data(self):
