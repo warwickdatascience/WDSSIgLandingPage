@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import $ from 'jquery';
-import './App.css';
 import Footer from './Components/Footer';
 
 class Foot extends Component {
