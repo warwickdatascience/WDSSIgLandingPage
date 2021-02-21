@@ -3,6 +3,7 @@ data/
 log/
 __pycache__/
 portfolio/
+resumeData.json
 
 # dependencies
 /node_modules
