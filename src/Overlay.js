@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import $ from 'jquery';
-import About from './Components/About';
-import Portfolio from './Components/Portfolio';
+import Overlays from './Components/Overlays';
 
-class App extends React.Component {
+class Overlay extends React.Component {
 
   constructor(props){
     super(props);
@@ -38,12 +37,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <About data={this.state.resumeData.main}/>
-	<Portfolio data={this.state.resumeData.portfolio}/>
+      <div className="Overlay">
+	<Overlays data={this.state.resumeData.portfolio}/>
       </div>
     );
   }
 }
 
-export default App;
+export default Overlay;

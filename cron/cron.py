@@ -7,6 +7,7 @@ load_dotenv()
 
 INSTAGRAM_ACCESS_TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
 DATA_PATH = os.getenv("DATA_PATH")
+IMAGE_PATH = os.getenv("IMAGE_PATH")
 LOG_PATH = os.getenv("LOG_PATH")
 
 # try to set up the logger - if LOG_PATH not present, it will open at
@@ -31,7 +32,7 @@ else:
     logger.error(f"Could not find logging directory {LOG_PATH}")
 
 try:
-    puller = InstagramPuller(INSTAGRAM_ACCESS_TOKEN, DATA_PATH)
+    puller = InstagramPuller(INSTAGRAM_ACCESS_TOKEN, DATA_PATH, IMAGE_PATH)
     puller.set_data()
 except Exception as e:
     logger.error(e)

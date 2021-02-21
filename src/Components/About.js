@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Particles from 'react-particles-js';
 
-class About extends Component {
+class About extends React.Component {
   render() {
 
     if(this.props.data){

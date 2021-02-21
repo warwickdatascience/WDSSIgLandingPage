@@ -4,9 +4,10 @@ import re       # to extract links
 
 
 class InstagramPuller:
-    def __init__(self, access_token, data_path):
+    def __init__(self, access_token, data_path, image_path):
         self.access_token = access_token
         self.data_path = data_path
+        self.image_path = image_path
 
         # automatically cache the data
         self.set_remote_data()
@@ -16,7 +17,7 @@ class InstagramPuller:
     # add caption to the JSON data
     def add_caption(self, data):
         for x in data:
-            x.update(links=",".join(
+            x.update(category=",".join(
                 map(str, re.findall(r"(https?://[^\s]+)", x["caption"]))))
         return data
 
@@ -33,8 +34,9 @@ class InstagramPuller:
 
     # collect data from local storage
     def set_local_data(self):
-        with open(f"{self.data_path}/post_data.json",) as local_file:
-            self.local_data = json.load(local_file)
+        with open(f"{self.data_path}/resumeData.json",) as local_file:
+            self.local_json = json.load(local_file)
+            self.local_data = self.local_json["portfolio"]["posts"]
 
     # extract new data (requires remote and local set)
     def set_new_data(self):
@@ -46,7 +48,7 @@ class InstagramPuller:
         # get the images
         image_tuples = [(x["id"], x["media_url"]) for x in self.new_data]
         for (image_id, image) in image_tuples:
-            with open(f"{self.data_path}/images/{image_id}.png", "wb") as handle:
+            with open(f"{self.image_path}/{image_id}.png", "wb") as handle:
                 im_response = requests.get(image, stream=True)
                 for block in im_response.iter_content(1024):
                     if not block:
@@ -55,8 +57,10 @@ class InstagramPuller:
 
     # process the JSON data
     def process_json(self):
-        with open(f"{self.data_path}/post_data.json", "w") as write_file:
-            json.dump(self.remote_data, write_file)
+        with open(f"{self.data_path}/resumeData.json", "w") as write_file:
+            new_data = dict(self.local_json)
+            new_data["portfolio"] = {"posts" : self.remote_data}
+            json.dump(new_data, write_file)
 
     # set the data that has been pulled
     def set_data(self):
