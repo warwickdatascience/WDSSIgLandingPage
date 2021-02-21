@@ -2,6 +2,7 @@
 data/
 log/
 __pycache__/
+portfolio/
 
 # dependencies
 /node_modules
