@@ -18,7 +18,7 @@ class Footer extends Component {
 		   <ul className="social-links">
 		   {networks}
            </ul>
-		   <a href="htpps://www.warwickdatascience.com" className="address">Warwick Data Science Society {year}</a>
+		   <a href="https://www.wdss.io" className="address">Warwick Data Science Society {year}</a>
         </div>
         <div id="go-top"><a className="smoothscroll" title="Back to Top" href="#about"><i className="icon-up-open"></i></a></div>
      </div>
