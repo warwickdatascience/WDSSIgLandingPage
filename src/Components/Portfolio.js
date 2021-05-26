@@ -10,20 +10,11 @@ class Portfolio extends Component {
 	var links = posts.category.split(',');
 	  return <div key={posts.title} className="columns portfolio-item">
            <div className="item-wrap">
-            <a id={posts.id} role="button" title={posts.id}>
-               <img alt={posts.id} src={postImage} />
+            <a id={posts.id} role="button" title={posts.caption.substr(0,100) + "..."}>
+               <img alt={posts.caption.substr(0,100) + "..."} src={postImage} />
                <div className="overlay">
                   <div className="portfolio-item-meta">
-			<h5>{posts.id}</h5>
-			{
-			  links.map(link => (
-			    <div>
-			      <a href={link}>
-				{link}
-			      </a>
-			    </div>
-			  ))
-			}
+		      <h5>{posts.caption.substr(0, 100)}...</h5>
 			<button id={posts.id} className="overlayButton"></button>
                   </div>
                 </div>

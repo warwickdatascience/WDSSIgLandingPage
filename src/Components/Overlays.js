@@ -7,12 +7,13 @@ class Overlays extends Component {
     if (this.props.data){
       var overlays = this.props.data.posts.map(function(overlays) {
 	var links = overlays.category.split(',');
+	var post_date = new Date(overlays.timestamp)
 	return <div className="overlayContainer" id={"m" + overlays.id} style={{display: 'none'}}>
           <div className="overlayImage" style={{backgroundImage: 'url(../images/portfolio/' + overlays.id + '.png)'}}></div>
 	  <div className="overlayComments">
 	    <div className="overlayCaption">
               <p>{overlays.caption}</p>
-              <p>{overlays.timestamp}</p>
+              <p>Date posted: {post_date.getDate() + "/" + (post_date.getMonth() + 1) + "/" + post_date.getFullYear()}</p>
 	      <div className="links">
                 {
 		  links.map(link => (
