@@ -1,12 +1,15 @@
 import requests  # to GET from Instagram API
 import json     # to gather local data
 import re       # to extract links
+from PIL import Image
+from resizeimage import resizeimage
 
 
 class InstagramPuller:
-    def __init__(self, access_token, data_path, image_path):
+    def __init__(self, access_token, data_path, temp_path, image_path):
         self.access_token = access_token
         self.data_path = data_path
+        self.temp_path = temp_path
         self.image_path = image_path
 
         # automatically cache the data
@@ -48,12 +51,17 @@ class InstagramPuller:
         # get the images
         image_tuples = [(x["id"], x["media_url"]) for x in self.new_data]
         for (image_id, image) in image_tuples:
-            with open(f"{self.image_path}/{image_id}.png", "wb") as handle:
+            with open(f"{self.temp_path}/{image_id}.png", "wb") as handle:
                 im_response = requests.get(image, stream=True)
                 for block in im_response.iter_content(1024):
                     if not block:
                         break
                     handle.write(block)
+            with Image.open(f"{self.temp_path}/{image_id}.png") as img:
+                width, height = img.size
+                dim = max(width, height)
+                img = resizeimage.resize_contain(img, [dim, dim])
+                img.save(f"{self.image_path}/{image_id}.png")
 
     # process the JSON data
     def process_json(self):
@@ -66,3 +74,5 @@ class InstagramPuller:
     def set_data(self):
         self.process_images()
         self.process_json()
+
+ 

@@ -3,7 +3,6 @@ data/
 log/
 __pycache__/
 portfolio/
-resumeData.json
 
 # dependencies
 /node_modules
@@ -27,3 +26,7 @@ resumeData.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# cron job
+venv/
+temp/
