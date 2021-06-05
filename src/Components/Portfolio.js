@@ -13,10 +13,10 @@ class Portfolio extends Component {
            <div className="item-wrap">
             <a id={posts.id} role="button" title={posts.caption.substr(0,100) + "..."} href={links[0]} target="_blank">
                <img alt={posts.caption.substr(0,100) + "..."} src={postImage} />
-               <div className="overlay">
+                <div className="overlay">
                   <div className="portfolio-item-meta">
-		      <h5>{posts.caption.substr(0,100)}...</h5>
-			<button id={posts.id} className="overlayButton"></button>
+	      		<h5>{posts.caption.substr(0,100)}...</h5>
+			<button id={posts.id} className="overlayButton" style={{ display: "none" }}></button>
                   </div>
                 </div>
             </a>
@@ -31,7 +31,7 @@ class Portfolio extends Component {
                <div className="overlay">
                   <div className="portfolio-item-meta">
 		      <h5>{posts.caption.substr(0,100)}...</h5>
-			<button id={posts.id} className="overlayButton"></button>
+			<button id={posts.id} className="overlayButton" style={{ display: "none" }}></button>
                   </div>
                 </div>
             </a>
